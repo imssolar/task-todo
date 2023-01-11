@@ -1,0 +1,13 @@
+
+
+
+
+{
+    "taskTitle":{
+        "taskToDo":"Tareas para hacer",
+        "taskInProgress":"Tareas en progreso",
+        "taskDone":"Tareas terminadas"
+    },
+    "arrayNum": ["dos", "tres"]
+}
+

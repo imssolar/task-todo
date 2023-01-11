@@ -1,0 +1,8 @@
+{
+	"taskTitle": {
+		"taskToDo": "Tasks to do",
+		"taskInProgress": "Tasks in progress",
+		"taskDone": "Tasks done"
+	},
+	"arrayNum": ["two", "three"]
+}

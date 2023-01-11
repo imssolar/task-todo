@@ -1,0 +1,16 @@
+.container_tasksToDo {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 2rem;
+}
+
+.container_information {
+	margin: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column !important;
+	align-items: center;
+	margin-top: 50vh;
+	background-color: aliceblue;
+	justify-content: center;
+}
