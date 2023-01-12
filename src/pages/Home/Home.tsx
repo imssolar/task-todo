@@ -25,65 +25,23 @@ import { useLenguage } from '../../hooks/useLenguage'
 
 export const Home = () => {
 	const dispatch = useDispatch<AppThunkDispatch>()
-
+	const [loadedData, setLoadedData] = useState(false)
 	useEffect(() => {
-
-
 		dispatch(getTasks())
-
 	}, [])
 
 	const { tasks, loading } = useSelector((state: RootState) => state.tasksState)
 	const [todo, setTodo] = useState<Task[]>([])
+
 	const [inProgress, setInProgress] = useState<Task[]>([])
 	const [Done, setDone] = useState<Task[]>([])
-
-
-
-	// const taskTodo: Task[] = []
-	// const taskProgress: Task[] = []
-	// const taskDone: Task[] = []
-
-	const handleOrder = () => {
+	useEffect(() => {
 		setTodo(tasks.filter((task) => task.status === 'To do'))
 		setInProgress(tasks.filter((task) => task.status === 'In progress'))
+		setDone(tasks.filter((task) => task.status === 'Done'))
+	}, [tasks])
 
-		// // tasks.map((item: Task) => {
-		// 	switch (item.status) {
-		// 		case 'In progress':
-		// 			setInProgress([
-		// 				...inProgress,
-		// 				item
-
-		// 			]
-		// 			)
-		// 			return
-		// 		case 'Done':
-		// 			setDone([
-		// 				...Done,
-		// 				item
-		// 			])
-		// 			return
-		// 		default:
-		// 			setTodo([
-		// 				...todo,
-		// 				item
-		// 			])
-		// 	}
-		// // })
-	}
-	// handleOrder()
-
-	useMemo(() => handleOrder(), [tasks])
-
-	// useEffect(() => {
-	// 	if (tasks.length) {
-	// 		console.log('iff')
-	// 		// handleOrder()
-	// 	}
-	// }, [tasks])
-	
-
+	// useMemo(() => handleOrder(), [tasks])
 
 	const { t, handleLenguage } = useLenguage()
 	const numeros: string[] = t('arrayNum', { returnObjects: true })
@@ -190,25 +148,22 @@ export const Home = () => {
 				</Grid>
 				<Grid item xs={12} md={4} className={style.container_form}>
 					<Form />
-					{loading === 'loading' ? (
-						<Spinner />
-					) : (
-						<div className={style.container_tasksToDo}>
-							<Typography
-								style={{
-									fontWeight: 'bold',
-									textAlign: 'center',
-									fontSize: '1.8rem',
-								}}
-								title={'Lista de tareas'}
-							/>
+					<div className={style.container_tasksToDo}>
+						<Typography
+							style={{
+								fontWeight: 'bold',
+								textAlign: 'center',
+								fontSize: '1.8rem',
+							}}
+							title={'Lista de tareas'}
+						/>
 
-							<TasksList
-								tasks={todo}
-								backgroundColorTask={'rgba(205,92,92)'}
-							/>
-						</div>
-					)}
+						<TasksList
+							tasks={todo}
+							backgroundColorTask={'rgba(205,92,92)'}
+							status={'To do'}
+						/>
+					</div>
 				</Grid>
 				<Grid item xs={12} md={4}>
 					<Typography
@@ -224,6 +179,7 @@ export const Home = () => {
 					<TasksList
 						tasks={inProgress}
 						backgroundColorTask={'rgba(255,165,0)'}
+						status={'In progress'}
 					/>
 					<div />
 					<Typography
@@ -239,6 +195,7 @@ export const Home = () => {
 					<TasksList
 						tasks={Done}
 						backgroundColorTask={'rgba(60,179,113)'}
+						status={'Done'}
 					/>
 				</Grid>
 			</Grid>
